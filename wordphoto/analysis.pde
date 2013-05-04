@@ -1,6 +1,6 @@
 float[] features;
 
-PowerSpectrum ps;
+FeatureExtractor<float[],float[]> featureExtractor;
 
 void setupMicrophone()
 {
@@ -17,14 +17,19 @@ void setupAnalysis()
   ShortFrameSegmenter sfs = new ShortFrameSegmenter(ac);
   sfs.addInput(ac.out);
   FFT fft = new FFT();
-  ps = new PowerSpectrum();
+  PowerSpectrum ps = new PowerSpectrum();
+  MelSpectrum mel = new MelSpectrum(8000f, 200);
+  MFCC mfcc = new MFCC(200);
+  featureExtractor = mfcc;
   sfs.addListener(fft);
   fft.addListener(ps);
+  ps.addListener(mel);
+  mel.addListener(mfcc);
   ac.out.addDependent(sfs);
 
 }
 
 void analysisStep()
 {
-   features = ps.getFeatures();
+  features = featureExtractor.getFeatures();
 }
