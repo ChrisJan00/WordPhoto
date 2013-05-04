@@ -26,10 +26,21 @@ void setupAnalysis()
   ps.addListener(mel);
   mel.addListener(mfcc);
   ac.out.addDependent(sfs);
+  
+  initFeatures();
+}
 
+void initFeatures() {
+  features = new float[200];
+  float[] featuresNew = featureExtractor.getFeatures();
+  for (int i = 0; i < featuresNew.length; i++)
+    features[i] = featuresNew[i];
 }
 
 void analysisStep()
 {
-  features = featureExtractor.getFeatures();
+  float alpha = 0.8;
+  float[] featuresNew = featureExtractor.getFeatures();
+  for (int i = 0; i < featuresNew.length; i++)
+    features[i] = alpha * features[i] + (1-alpha) * featuresNew[i];
 }
