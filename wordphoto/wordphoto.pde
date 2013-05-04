@@ -3,7 +3,7 @@ import beads.*;
 AudioContext ac;
 
 void setup() {
-  size(800,800);
+  size(1200,800);
 
   ac = new AudioContext();
   setupMicrophone();
