@@ -42,7 +42,8 @@ void drawVisuals() {
       
       
       fill(r*255, g*255, b*255, a*255);
-      stroke(r*255, g*255, b*255, a*255);
+      //stroke(r*255, g*255, b*255, a*255);
+      noStroke();
 
       float rad = width * 5 * data[i][4];
       float ang = i * PI * 2 / (visiblecircles - 1);

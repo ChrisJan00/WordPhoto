@@ -7,10 +7,10 @@ int index;
 int state;
 int timeStart;
 
-int mode;
+int mode = 1;
 
 void setup() {
-  size(600,600);
+  size(displayWidth,displayHeight,P2D);
   
   // setup font
   fill(255);
@@ -18,7 +18,6 @@ void setup() {
   index = 0;
   memory = new ArrayList<float[]>();
   state = 0;
-  mode = 1;
 
   // setup audio
   ac = new AudioContext();
@@ -71,8 +70,10 @@ void draw()
     
   }
   } else { // mode = 1
-      analysisStep();
-      drawVisuals();
+      if (state == 0 ) {
+        analysisStep();
+        drawVisuals();
+      }
   }
 }
 
