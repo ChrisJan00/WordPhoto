@@ -7,8 +7,10 @@ int index;
 int state;
 int timeStart;
 
+int mode;
+
 void setup() {
-  size(1200,800);
+  size(600,600);
   
   // setup font
   fill(255);
@@ -16,12 +18,15 @@ void setup() {
   index = 0;
   memory = new ArrayList<float[]>();
   state = 0;
+  mode = 1;
 
   // setup audio
   ac = new AudioContext();
   setupMicrophone();
   setupAnalysis();
   ac.start();
+  
+  ellipseMode(CENTER);
 }
 
 void draw()
@@ -29,6 +34,7 @@ void draw()
   background(back);
   fill(255);
   
+  if (mode == 0) {
   if (state == 0) {
       timeStart = millis();
       state = 1;
@@ -52,7 +58,7 @@ void draw()
       text("replaying in "+String.valueOf(timediff/1000 + 1), 200, 200);
     } else state = 4;
   } else if (state == 4) {
-    int timediff = timeStart + 20000 - millis();
+    int timediff = timeStart + 25000 - millis();
     if (timediff > 0) {
        if(memory.size()!=0) {
           features = memory.get(index);
@@ -64,7 +70,10 @@ void draw()
      } else state = 0;
     
   }
-  
+  } else { // mode = 1
+      analysisStep();
+      drawVisuals();
+  }
 }
 
 

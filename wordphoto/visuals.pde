@@ -22,15 +22,19 @@ void drawVisuals() {
     float data[][] = new float[circlecount][paramcount];
     
     int ndx = 0;
-    for (int i = 0; i < circlecount; i++) {
-      for (int j=0; j < paramcount; j++) {
-        data[i][j] = features[i*paramcount + j] * ndx / features.length;
+    
+    int visiblecircles = 20;
+    if (visiblecircles > circlecount) visiblecircles = circlecount;
+    
+      for (int i = 0; i < visiblecircles; i++) {
+        for (int j=0; j < paramcount; j++) {  
+        data[i][j] = features[i*paramcount + j] * (ndx+1) / features.length;
         ndx++;
       }
     }
       
-      
-   for (int i = 0; i < circlecount; i++) {
+   
+   for (int i = 0; i < visiblecircles; i++) {
       float r = data[i][0] * 15;
       float g = data[i][1] * 15;
       float b = data[i][2] * 15;
@@ -41,11 +45,13 @@ void drawVisuals() {
       stroke(r*255, g*255, b*255, a*255);
 
       float rad = width * 5 * data[i][4];
-      float ang = i * PI * 2 / circlecount;
-      int x = int(rad * cos(ang) + width / 2);
-      int y = int(rad * sin(ang) + height / 2);
+      float ang = i * PI * 2 / (visiblecircles - 1);
       int rr = int(width * (0.5 -  10 * data[i][5]));
-      ellipse(x,y, rr, rr);
+      int x = int(rad * cos(ang) + width / 2 - rr/2);
+      int y = int(rad * sin(ang) + height / 2 - rr/2);
+      
+      //ellipse(x,y, rr, rr);
+      rect(x,y,rr,rr);
     }
   }
 }

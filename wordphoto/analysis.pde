@@ -39,7 +39,7 @@ void initFeatures() {
 
 void analysisStep()
 {
-  float alpha = 0.8;
+  float alpha = 0.6;
   float[] featuresNew = featureExtractor.getFeatures();
   for (int i = 0; i < featuresNew.length; i++)
     features[i] = alpha * features[i] + (1-alpha) * featuresNew[i];
