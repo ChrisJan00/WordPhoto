@@ -27,7 +27,8 @@ void setup() {
 void draw()
 {
   background(back);
-
+  fill(255);
+  
   if (state == 0) {
       timeStart = millis();
       state = 1;
