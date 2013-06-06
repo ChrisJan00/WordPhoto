@@ -1,0 +1,3 @@
+
+wordphoto
+wordphoto.jar,core.jar,jogl-all.jar,gluegen-rt.jar,jogl-all-natives-windows-i586.jar,gluegen-rt-natives-windows-i586.jar,mp3spi1.9.4.jar,jl1.0.1.jar,tritonus_share.jar,beads.jar
